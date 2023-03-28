@@ -1,0 +1,76 @@
+.navBarContainer{
+    position: relative;
+    border-bottom: solid 2px white;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+.navBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 10vh;
+    justify-content: space-between;
+    padding: 0 3%;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 4vw;
+    background-color: white;
+    position: relative;
+    bottom: -50%;
+    font-size: 1.5vw;
+}
+
+.navBar p{
+    font-family: Tilt Warp;
+    font-weight: 100;
+    font-size: 1.2vw;
+    color: #15212F;
+}
+
+.navBar p:hover{
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 2vw;
+}
+
+.navBar input{
+    font-family: Tilt Warp;
+    font-weight: 250;
+    border-radius: 15px;
+    border-color: #15212F;
+    width: 50%;
+    height: 30%;
+    padding: .5% 2%;
+    font-size: 1.5vw;
+}
+
+.logo {
+    font-family: Tilt Warp;
+    position: absolute;
+    font-size: 2vw;
+    font-weight: 700;
+    color: white;
+    margin-left: 5%;
+    left: 0;
+}
+
+.login{
+    font-family: Tilt Warp;
+    position: absolute;
+    font-size: 1.5vw;
+    font-weight: 250;
+    color: white;
+    margin-right: 5%;
+    right: 0;
+    cursor: pointer;
+}
+
+.login:hover{
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 2.2vw;
+}
