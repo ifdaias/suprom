@@ -1,8 +1,7 @@
-import './Phrase.css'
 
 const Phrase = ({...props}) =>{
     return(
-        <h1 className="phrase">{props.text}</h1>
+        <h1 style={{fontWeight: 500, fontSize: '5vw'}}>{props.text}</h1>
     )
 }
 

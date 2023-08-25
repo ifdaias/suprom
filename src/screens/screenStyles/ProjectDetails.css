@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.projectTitle{
+    margin-left: 100;
+    font-size: 6vh;
+    margin: 0
+}
+
+.projectDescription{
+    font-size: 2.1vh;
+    margin-left: auto;
+    font-family:sans-serif;
+    
+}
+
+.membersContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}

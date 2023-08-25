@@ -1,0 +1,28 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-column-gap: 8vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    row-gap: 3vw;
+}
+
+.registerButton{
+    background-color: white;
+    border: 1px solid white;
+    width: 20vw;
+    padding: 1vw 2vw 1vw 2vw;
+    color: #15212F;
+    cursor:  pointer;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    font-family: Tilt Warp;
+    font-size: 1.5vw;
+    border-radius: 15px;
+}
+
+.registerButton:hover{
+    background-color: #15212F;;
+    color: white;
+    transition: 0.5s;
+}

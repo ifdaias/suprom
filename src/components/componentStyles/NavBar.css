@@ -1,5 +1,4 @@
 .navBarContainer{
-    position: relative;
     border-bottom: solid 2px white;
     height: 10vh;
     width: 100vw;
@@ -67,6 +66,7 @@
     margin-right: 5%;
     right: 0;
     cursor: pointer;
+    top: .5%;
 }
 
 .login:hover{
