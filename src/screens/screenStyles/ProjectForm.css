@@ -1,0 +1,11 @@
+.boxForm {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    width: auto;
+    margin-top: 2vw;
+    padding: 2vw 4vw;
+    box-sizing: border-box;
+    z-index: 3;
+}

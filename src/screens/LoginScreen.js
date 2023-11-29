@@ -1,86 +1,148 @@
-import './screenStyles/Login.css'
-import Phrase from '../components/Phrase'
-import { useContext, useEffect } from 'react'
-import axios from 'axios'
-import { UserDataContext } from '../App'
-import { useNavigate } from 'react-router-dom'
-import Layout from '../components/Layout'
-
+import "./screenStyles/Login.css";
+import Phrase from "../components/Phrase";
+import { useContext, useState } from "react";
+import axios from "axios";
+import { UserDataContext } from "../App";
+import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
+import { Link } from "react-router-dom";
+import PopupForm from "../components/PopupForm";
 
 const Login = () => {
-    const {username, setUsername, password, setPassword, switchLogInOut} = useContext(UserDataContext);
+  const { userState, changeUserState, switchIsLoggedIn } =
+    useContext(UserDataContext);
 
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  //handle popup
+  const [isOpen, setIsOpen] = useState(false);
+  const [content, setContent] = useState("");
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
 
-    function containsSpecialChars(str) {
-        const specialChars = /[`!#$%^&*()+\=\[\]{};':"\\|,<>\/?~]/;
-        return specialChars.test(str);
-    }
+  function containsSpecialChars(str) {
+    const specialChars = /[`!#$%^&*()+\=\[\]{};':"\\|,<>\/?~]/;
+    return specialChars.test(str);
+  }
 
-    function verifyCredentials(cod, nip) {
-        /*const response = await fetch(`148.202.152.33/login23siiau.php?codigo=${cod}&nip=${nip}`)*/
-        return axios.get('https://api.publicapis.org/entries')
-            .then(function (response) {
-            console.log(response.data);
-            return response.data;
-            })
-            .catch(function (error) {
-            console.log(JSON.stringify(error));
-            return error;
-            });
-    }
+  function handleChangeUsername(e) {
+    const value = e.target.value;
+    changeUserState("code", value);
+  }
 
-    async function loginOnPress(user, pass){
-        let {userIsValid, passIsValid} = false;
+  function handleChangePassword(e) {
+    const value = e.target.value;
+    changeUserState("password", value);
+  }
 
-        if(user != null)
-            if(!/e/.test(user))
-                userIsValid = true;
+  function verifyCredentials() {
+    const headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      Accept: "*/*",
+    };
 
-        if(pass != null)
-            passIsValid = true;
+    const data = {
+      Codigo: userState.code,
+      Contrasena: userState.password,
+    };
 
-        if(userIsValid){
-            if(passIsValid){
-                if(await verifyCredentials(user, pass)){
-                    switchLogInOut()
-                    return navigate('/home')
-                }
-                else
-                 console.warn('Credenciales no existen')
-            }
-            else
-             console.warn('Ingrese una contraseña')
+    var _this = this
+    axios
+      .put("https://localhost:7082/u3dk8/check", data, {
+        headers: headers,
+      })
+      .then(function (response) {
+        //console.log("RESPUESTA LLOGIN");
+        //console.log(response.data);
+        if (response.data.Nombre != undefined){
+          localStorage.setItem("Name", response.data.Nombre);
+          localStorage.setItem("Code", data.Codigo);
+          localStorage.setItem("UserType", response.data.TipoUsuario);
+          localStorage.setItem("LoginTime", new Date())
+          switchIsLoggedIn()
+          
         }
-        else
-            console.warn('Ingrese un codigo valido')
+        else{
+          setContent(response.data);
+          togglePopup()
+        }
+      })
+      .catch(function (error) {
+        //console.log(JSON.stringify(error));
+        setContent("Ha ocurrido un error")
+        togglePopup()
+      });
+  }
+
+  async function loginOnPress() {
+    const regexCode = /\d{9,}/i;
+    let validCredentials = false;
+
+    while (!validCredentials) {
+      if (regexCode.test(userState.code)) {
+        if (userState.password.length > 0) {
+          validCredentials = true;
+        } else {
+          //console.warn("Ingrese una contraseña");
+          setContent("Ingrese una contraseña");
+          break;
+        }
+      } else {
+        //console.warn("Ingrese un código válido");
+        setContent("Ingrese un código válido");
+        break;
+      }
     }
 
-    useEffect(() => {
+    if (validCredentials) verifyCredentials();
+    else togglePopup();
+  }
 
-        /*fetch('http://148.202.152.33/login23siiau.php?codigo=215497467&nip=DanteKrato', { mode: 'no-cors'})
-            .then(response => console.log('Response: ' + response.data))
-            .then(data => console.log('Data: ' + data))
-            .catch(error => console.log('Error: ' + error));*/
-            console.log('DESDE LOGIN: ' + username + password)
-      });
+  function _handleKeyDown (e) {
+    if (e.key === 'Enter') {
+      loginOnPress()
+    }
+  }
 
-    return (
-        <Layout screen='login'>
-            <div className='box'>
-                    <h1 className='suprom'>SUPROM</h1>
-                    <div className='field'>
-                        <input type="number" id="codigo" name="codigo" placeholder='Código...'/>
-                    </div>
-                    <div className='field'>
-                            <input type="password" id="contrasena" name="contrasena" placeholder='Contraseña...'/>
-                    </div>
-                    <button onClick={() => loginOnPress('215497467', 'DanteKrato')} >Ingresar</button>
-            </div>
-            <Phrase text={"Ingresa tu código y NIP de SIIAU"} />
-        </Layout>
-    )
-}
+  return (
+    <Layout screen="login">
+      <div className="box">
+        <h1 className="suprom">SUPROM</h1>
+        <div className="field">
+          <input
+            type="number"
+            id="codigo"
+            name="codigo"
+            placeholder="Código..."
+            onChange={handleChangeUsername}
+            value={userState.code || ''}
+            onKeyDown={_handleKeyDown}
+          />
+        </div>
+        <div className="field">
+          <input
+            type="password"
+            id="contrasena"
+            name="contrasena"
+            placeholder="Contraseña..."
+            onChange={handleChangePassword}
+            value={userState.password || ''}
+            onKeyDown={_handleKeyDown}
+          />
+        </div>
+        <button onClick={loginOnPress} className="loginButton">
+          Ingresar
+        </button>
+        <Link to={"/register"} className="register">
+          <p>Registrarse</p>
+        </Link>
+      </div>
+      <Phrase text={"Ingresa tu código y contraseña"} paddingRight="0" />
+      {isOpen && <PopupForm handleClose={togglePopup} content={content} />}
+    </Layout>
+  );
+};
 
-export default Login
+export default Login;

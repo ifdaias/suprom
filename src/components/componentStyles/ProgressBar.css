@@ -1,0 +1,30 @@
+.containerStyles {
+    height:3vw;
+    width: 100%;
+    background-color: white;
+    border-radius: 50px;
+    display: flex;
+    justify-content:left;
+    /*margin-top: 2vh;
+    margin-bottom: 2vh;*/
+  }
+
+.constfillerStyles{
+    display:flex;
+    height: 100%;
+    background-color: #4FB993;
+    border-radius: inherit;
+    text-align: right;
+    justify-content: right;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.LabelStyles{
+    padding-right: 2vw;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+    font-size: 2.5vw;
+  }

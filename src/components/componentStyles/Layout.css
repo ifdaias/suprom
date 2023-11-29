@@ -4,6 +4,7 @@
     margin-left: auto;
     margin-right: auto;
     align-items: center;
+    margin-bottom: 5vh;
 }
 
 .layoutColumn{
@@ -14,4 +15,6 @@
     padding-right: 10vw;
     padding-top: 7vh;
     overflow-x: scroll;
+    margin-bottom: 5vh;
+    justify-content: flex-start;
 }

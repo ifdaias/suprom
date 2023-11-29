@@ -2,18 +2,17 @@ import { useEffect, useState } from 'react';
 import './componentStyles/ProjectCard.css'
 import { useNavigate } from 'react-router-dom';
 
-const ProjectCard = () =>{
+const ProjectCard = (props) =>{
 
     const navigate = useNavigate();
 
     function toProject(){
-        return navigate('/details')
+        return navigate('/details', {state: {titulo: props.titulo}})
     }
     
-    const [projectTitle, setProjectTitle] = useState('Titulo del proyecto')
     return(
         <div className='cardBox' onClick={toProject}>
-            <p className='cardTitle'S>{projectTitle}</p>
+            <p className='cardTitle'>{props.titulo}</p>
         </div>
     )
 }

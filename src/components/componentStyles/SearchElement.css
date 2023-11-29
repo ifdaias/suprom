@@ -1,4 +1,4 @@
-.cardBox {
+.searchBox {
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -10,16 +10,16 @@
     overflow: hidden;
     box-sizing: border-box;
     padding: 1vw 1vw;
-    z-index: 1;
+    border-bottom: solid 2px #15212F;
 }
 
-.cardBox:hover{
-    transform: translate(2vh, -2vh);
+.searchBox:hover{
     cursor: pointer;
-    transition: 0.5s;
+    transition: 1s;
+    background-color: #4FB993;
 }
 
-.cardTitle{
+.searchTitle{
     font-size: 1.5vw;
     color: #15212F;
     max-width: 100%;

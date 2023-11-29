@@ -9,12 +9,12 @@ const Layout = ({children, ...props}) =>{
         const screen = props.screen;
         if(screen == 'home' || screen == 'login')
             setLayoutClass('layoutRow')
-        else if(screen == 'details' || screen == 'projects' || screen == 'details')
+        else if(screen == 'details' || screen == 'projects' || screen == "form" || screen == 'register')
             setLayoutClass('layoutColumn')
       });
     
     return(
-        <div className={layoutClass} style={{height: '89vh'}}>
+        <div className={layoutClass} style={{height: '92vh', marginTop: `${props.marginTop}`, justifyContent: `${props.justifyContent}`, alignContent: `${props.alignContent}`}}>
             {children}
         </div>
     )
