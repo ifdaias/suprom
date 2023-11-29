@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\SUPROM_RESTfulAPI.props" />
+</Project>
